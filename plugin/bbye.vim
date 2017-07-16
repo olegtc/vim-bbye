@@ -35,7 +35,7 @@ function! s:bdelete(bang, buffer_name)
 		" If found a new buffer for this window, mission accomplished:
 		if bufnr("%") != buffer | continue | endif
 
-		call s:new(a:bang) 
+		call s:new(a:bang)
 	endfor
 
 	" Because tabbars and other appearing/disappearing windows change
@@ -46,6 +46,7 @@ function! s:bdelete(bang, buffer_name)
 	" If it hasn't been already deleted by &bufhidden, end its pains now.
 	" Unless it previously was an unnamed buffer and :enew returned it again.
 	if bufexists(buffer) && buffer != bufnr("%")
+	    exe "lclose"
 		exe "bdelete" . a:bang . " " . buffer
 	endif
 endfunction
